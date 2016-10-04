@@ -106,10 +106,10 @@ Domains.prototype.setDomainNameservers = function (domainid, nameservers, callba
 /**
  * Send a transfer command to the registrar - http://docs.whmcs.com/API:Transfer_Domain
  * @param domainid String|Number Pass in domain id or name
- * @param eppcode String
+ * @param [opts] Object
  * @param callback
  */
-Domains.prototype.setDomainTransfer = function (domainid, eppcode, callback) {
+Domains.prototype.domainTransfer = function (domainid, opts, callback) {
   var options = {
     action: 'domaintransfer'
   };
@@ -120,11 +120,51 @@ Domains.prototype.setDomainTransfer = function (domainid, eppcode, callback) {
     options.domainid = domainid;
   }
 
-  if (typeof eppcode === 'function') {
-    callback = eppcode;
+  if (typeof opts === 'function') {
+    callback = opts;
   } else {
-    options.eppcode = eppcode;
+    options = extend(options, opts);
   }
+
+  var createOptions = {
+    client: this,
+    body: options
+  };
+
+  utils.modem(createOptions, callback);
+};
+
+/**
+ * Obtain the WHOIS of a domain from the registrar - http://docs.whmcs.com/API:Get_Domain_WHOIS
+ * @param domainid String|Number
+ * @param callback
+ */
+Domains.prototype.getDomainWHOIS = function (domainid, callback) {
+  var options = {
+    action: 'domaingetwhoisinfo',
+    domainid: domainid
+  };
+
+  var createOptions = {
+    client: this,
+    body: options
+  };
+
+  utils.modem(createOptions, callback);
+};
+
+/**
+ * Update the contact information on a domain - http://docs.whmcs.com/API:Domain_Update_WHOIS
+ * @param domainid String|Number
+ * @param xml XML
+ * @param callback
+ */
+Domains.prototype.updateDomainWHOIS = function (domainid, xml, callback) {
+  var options = {
+    action: 'domainupdatewhoisinfo',
+    domainid: domainid,
+    xml: xml
+  };
 
   var createOptions = {
     client: this,
