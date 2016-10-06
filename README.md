@@ -118,7 +118,6 @@ whmcs_client.customers.getCustomerEmails(clientid, function(err, emails) {
 - setDomainNameservers: function (domainid, nameservers, callback)
 - setDomainTransfer: function (domainid, eppcode, callback)
 
-
 ### Utilities
 
 - getToDoItems: function (status, offset, limit, callback)
