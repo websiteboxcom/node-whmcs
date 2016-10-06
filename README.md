@@ -116,7 +116,6 @@ whmcs_client.customers.getCustomerEmails(clientid, function(err, emails) {
 - setDomainLockStatus: function (domainid, status, callback)
 - getDomainNameservers: function (domainid, callback)
 - setDomainNameservers: function (domainid, nameservers, callback)
-- setDomainTransfer: function (domainid, eppcode, callback)
 
 ### Utilities
 
