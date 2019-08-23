@@ -60,6 +60,22 @@ Billing.prototype.addOrder = function (clientid, order, callback) {
   utils.modem(createOptions, callback);
 };
 
+Billing.prototype.addCancelRequest = function (clientid, opts, callback) {
+  var options = {
+    action: 'addcancelrequest',
+    userid: clientid
+  };
+
+  options = extend(options, opts);
+
+  var createOptions = {
+    client: this,
+    body: options
+  };
+
+  utils.modem(createOptions, callback);
+};
+
 Billing.prototype.createInvoice = function (clientid, invoice, callback) {
   var options = {
     action: 'createinvoice',
