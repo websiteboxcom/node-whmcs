@@ -13,7 +13,6 @@ var Products = function(config) {
 Products.prototype.getProduct = function(id, callback) {
   this.getProductsByType('product', id, callback);
 };
-
 /**
  * Get product group by ID
  * @param gid
@@ -106,6 +105,28 @@ Products.prototype.getOrders = function(method, id, offset, limit, callback) {
     body: options
   };
 
+  utils.modem(createOptions, callback);
+};
+
+/**
+ * Update a Product
+ * @param [serviceid] String
+ * @param [opts] Object
+ * @param callback
+ */
+Products.prototype.updateClientProduct = function (serviceid, opts, callback) {
+  var options = {
+    action: 'updateclientproduct',
+    serviceid: serviceid
+  };
+
+  options = extend(options, opts);
+
+  var createOptions = {
+    client: this,
+    body: options
+  };
+  
   utils.modem(createOptions, callback);
 };
 
