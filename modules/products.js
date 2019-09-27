@@ -120,7 +120,7 @@ Products.prototype.updateClientProduct = function (serviceid, opts, callback) {
     serviceid: serviceid
   };
 
-  options = extend(options, opts);
+  options = utils.extend(options, opts);
 
   var createOptions = {
     client: this,
